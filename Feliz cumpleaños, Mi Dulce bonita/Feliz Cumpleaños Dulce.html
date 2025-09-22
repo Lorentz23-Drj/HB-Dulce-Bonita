@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz cumpleaños Dulce de mi corazón</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sour Gummy', system-ui, -apple-system, sans-serif;
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        /* Estrellas en el fondo */
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .stars-small {
+            background-image:
+                radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+                radial-gradient(2px 2px at 40px 70px, #fff, transparent),
+                radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+                radial-gradient(1px 1px at 130px 80px, #fff, transparent),
+                radial-gradient(2px 2px at 160px 30px, #fff, transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: sparkle 3s linear infinite;
+        }
+
+        .stars-medium {
+            background-image:
+                radial-gradient(1px 1px at 40px 60px, #fff, transparent),
+                radial-gradient(1px 1px at 120px 10px, #fff, transparent),
+                radial-gradient(1px 1px at 80px 80px, #fff, transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: sparkle 2s linear infinite;
+        }
+
+        .stars-large {
+            background-image:
+                radial-gradient(2px 2px at 10px 20px, #fff, transparent),
+                radial-gradient(2px 2px at 60px 60px, #fff, transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: sparkle 4s linear infinite;
+        }
+
+        @keyframes sparkle {
+            from { transform: translateY(0px); opacity: 1; }
+            to { transform: translateY(-100px); opacity: 0.3; }
+        }
+
+        /* Animaciones de llamas */
+        @keyframes flicker {
+            0%, 100% { 
+                transform: translateY(0px) scale(1) rotate(-1deg); 
+                opacity: 0.9; 
+            }
+            25% { 
+                transform: translateY(-1px) scale(1.05) rotate(1deg); 
+                opacity: 1; 
+            }
+            50% { 
+                transform: translateY(-2px) scale(0.95) rotate(-1deg); 
+                opacity: 0.8; 
+            }
+            75% { 
+                transform: translateY(-1px) scale(1.02) rotate(1deg); 
+                opacity: 1; 
+            }
+        }
+
+        @keyframes flicker-inner {
+            0%, 100% { 
+                transform: translateY(0px) scale(1); 
+                opacity: 0.8; 
+            }
+            50% { 
+                transform: translateY(-1px) scale(1.1); 
+                opacity: 1; 
+            }
+        }
+
+        .animate-flicker {
+            animation: flicker 1.5s ease-in-out infinite;
+        }
+
+        .animate-flicker-inner {
+            animation: flicker-inner 1.2s ease-in-out infinite;
+        }
+
+        /* Animación de mensajes flotantes */
+        @keyframes float-up-and-fade {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8) rotate(0deg);
+            }
+            15% {
+                opacity: 1;
+                transform: translate(-50%, -60%) scale(1.1) rotate(2deg);
+            }
+            25% {
+                transform: translate(-50%, -70%) scale(1) rotate(-1deg);
+            }
+            85% {
+                opacity: 1;
+                transform: translate(-50%, -200%) scale(0.9) rotate(1deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -250%) scale(0.7) rotate(-2deg);
+            }
+        }
+
+        /* Updated message animation to appear and disappear smoothly in place */
+        @keyframes mobile-float-up {
+            0% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(10px) scale(0.8);
+            }
+            15% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0px) scale(1.05);
+            }
+            25% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0px) scale(1);
+            }
+            75% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0px) scale(1);
+            }
+            85% {
+                opacity: 0.7;
+                transform: translateX(-50%) translateY(-5px) scale(0.95);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-10px) scale(0.9);
+            }
+        }
+
+        .animate-float-message {
+            animation: float-up-and-fade 4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        /* Updated message positioning to appear below cake instead of bottom of screen */
+        .mobile-message {
+            position: fixed !important;
+            left: 50% !important;
+            top: 50% !important;
+            transform: translateX(-50%) translateY(120px) !important;
+            z-index: 25 !important;
+        }
+        
+        .mobile-message .animate-float-message {
+            animation: mobile-float-up 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        /* Animación de partículas */
+        @keyframes particle-burst {
+            0% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0) translate(var(--particle-x), var(--particle-y));
+            }
+        }
+
+        .animate-particle-burst {
+            animation: particle-burst 1s ease-out forwards;
+        }
+
+        /* Added custom slider styles */
+        .slider {
+            background: linear-gradient(to right, #ec4899 0%, #ec4899 30%, rgba(255,255,255,0.2) 30%, rgba(255,255,255,0.2) 100%);
+        }
+        
+        .slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ec4899;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .slider::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ec4899;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Agregar animación para el mensaje debajo de la torta */
+        @keyframes message-appear {
+            0% {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            15% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            85% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+        }
+        .animate-message-appear {
+            animation: message-appear 6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        /* Responsive: mensaje más pequeño en móvil */
+        @media (max-width: 500px) {
+            .message-content {
+                font-size: 0.95rem;
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+                min-width: 0;
+                max-width: 90vw;
+            }
+            .message-content .text-lg {
+                font-size: 1rem;
+            }
+            .message-content .text-2xl {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen relative overflow-hidden bg-gradient-to-b from-black to-blue-900 flex items-center justify-center">
+    <!-- Fondo estrellado -->
+    <div class="absolute inset-0 opacity-80">
+        <div class="stars stars-small"></div>
+        <div class="stars stars-medium"></div>
+        <div class="stars stars-large"></div>
+    </div>
+
+    <!-- Reproductor de música -->
+    <div id="musicPlayer" class="fixed top-5 left-1/2 transform -translate-x-1/2 z-30 
+                    bg-purple-900/60 backdrop-blur-lg rounded-2xl p-4 border border-pink-300/30
+                    shadow-lg transition-all duration-500 min-w-80 opacity-0 -translate-y-full" style="display: none;">
+        <div class="flex items-center gap-3">
+            <button id="playButton" class="bg-pink-500 hover:bg-pink-600 text-white rounded-full w-9 h-9 flex items-center justify-center transition-all duration-300 shadow-lg hover:scale-105">
+                <svg id="playIcon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z"/>
+                </svg>
+                <svg id="pauseIcon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                </svg>
+            </button>
+            <div class="flex-1">
+                <div class="text-pink-200 text-xs font-medium mb-1">Hay canciones que me recuerdan a ti ❤️</div>
+                <div id="progressBar" class="w-full h-1 bg-white/20 rounded-full cursor-pointer overflow-hidden">
+                    <div id="progressFill" class="h-full bg-gradient-to-r from-pink-400 to-pink-600 transition-all duration-100" style="width: 0%"></div>
+                </div>
+                <div class="flex justify-between text-pink-300/80 text-xs mt-1">
+                    <span id="currentTime">0:00</span>
+                    <span id="duration">0:00</span>
+                </div>
+            </div>
+            <!-- Added volume control section -->
+            <div class="flex items-center gap-2 ml-2">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" class="text-pink-300">
+                    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                </svg>
+                <input type="range" id="volumeSlider" min="0" max="100" value="30" 
+                       class="w-16 h-1 bg-white/20 rounded-lg appearance-none cursor-pointer slider">
+            </div>
+        </div>
+    </div>
+
+    <!-- Pastel de cumpleaños -->
+    <div class="relative z-10 transform -translate-y-10">
+        <button id="cakeButton" class="relative transition-transform duration-150 hover:scale-105 active:scale-95 focus:outline-none">
+            <div class="relative">
+                <!-- Pastel SVG -->
+                <svg width="320" height="280" viewBox="0 0 320 280" class="drop-shadow-2xl">
+                    <!-- Base del pastel -->
+                    <ellipse cx="160" cy="260" rx="140" ry="20" fill="#8B4513" opacity="0.3" />
+                    
+                    <!-- Capa inferior -->
+                    <rect x="40" y="180" width="240" height="80" rx="8" fill="#D2691E" />
+                    <rect x="40" y="180" width="240" height="15" rx="8" fill="#F4A460" />
+                    
+                    <!-- Decoración capa inferior -->
+                    <rect x="50" y="200" width="220" height="8" fill="#FFB6C1" />
+                    <rect x="60" y="220" width="200" height="6" fill="#FFC0CB" />
+                    
+                    <!-- Capa media -->
+                    <rect x="60" y="120" width="200" height="70" rx="6" fill="#CD853F" />
+                    <rect x="60" y="120" width="200" height="12" rx="6" fill="#F4A460" />
+                    
+                    <!-- Decoración capa media -->
+                    <rect x="70" y="135" width="180" height="6" fill="#FFB6C1" />
+                    <rect x="80" y="155" width="160" height="5" fill="#FFC0CB" />
+                    
+                    <!-- Capa superior -->
+                    <rect x="80" y="80" width="160" height="50" rx="4" fill="#DEB887" />
+                    <rect x="80" y="80" width="160" height="10" fill="#F4A460" />
+                    
+                    <!-- Decoración capa superior -->
+                    <rect x="90" y="95" width="140" height="5" fill="#FFB6C1" />
+                    <rect x="100" y="110" width="120" height="4" fill="#FFC0CB" />
+                    
+                    <!-- Cerezas decorativas -->
+                    <circle cx="120" cy="200" r="4" fill="#DC143C" />
+                    <circle cx="200" cy="205" r="4" fill="#DC143C" />
+                    <circle cx="140" cy="140" r="3" fill="#DC143C" />
+                    <circle cx="180" cy="145" r="3" fill="#DC143C" />
+                </svg>
+
+                <!-- Velas -->
+                <div id="candlesContainer" class="absolute inset-0 pointer-events-none"></div>
+
+                <!-- Contador de velas encendidas -->
+                <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 text-center">
+                    <div class="bg-purple-900/70 backdrop-blur-sm rounded-lg px-4 py-2 border border-pink-300/30">
+                        <div id="candleCounter" class="text-pink-200 text-sm font-medium">Enciende las velitas 🕯️</div>
+                        <div id="completionMessage" class="text-yellow-300 text-xs mt-1 animate-bounce" style="display: none;">
+                            ¡FELICES 21 AÑOS! 🎉
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </button>
+    </div>
+
+    <!-- Audio -->
+    <audio id="backgroundMusic" loop preload="metadata">
+        <source src="https://www.dropbox.com/scl/fi/y4a2ctxev4dv6odp3f43r/I-Hear-a-Symphony.mp3?rlkey=6um8dg8f0h8wkrac4orpnivo9&st=1sl4bj5l&dl=1" type="audio/mpeg" />
+    </audio>
+
+    <script>
+        // Mensajes de cumpleaños
+        const BIRTHDAY_MESSAGES = [
+            "¡Deseo que cada mañana te reciba con un café ☕ y una sonrisa tuya en el espejo! ✨",
+            "¡Deseo que nunca se apague la chispa con la que brillas cuando hablas de lo que amas! 💫", 
+            "¡Deseo que tu pasión te lleve lejos, más allá de las ciudades y las distancias! 🌍",
+            "¡Deseo que el cielo te regale atardeceres tan bonitos como los que sueño ver contigo! 🌅",
+            "¡Te deseo fuerzas en los días difíciles y calma en los días inciertos! 🌿",
+            "¡Deseo que tu luz nunca dude de sí misma, porque es única e inconfundible! 💎",
+            "¡Deseo que los kilómetros entre ambos se conviertan en puentes hacia nuevos encuentros y aventuras! 🌉",
+            "¡Deseo que tus metas se cumplan paso a paso, y que celebres cada logro con orgullo! 🏆",
+            "¡Deseo que cada noche te regale paz y sueños dulces! 🌙⭐",
+            "¡Deseo que los días grises se pinten de colores con tu luz propia! 🌈",
+            "¡Deseo que la vida nos regale más momentos juntos, de esos que se tatúan en la memoria! 🌸",
+            "¡Deseo que tus pasos sigan firmes, guiados por tu pasión y constancia! 👟🤗",
+            "¡Deseo que el tiempo nunca borre lo auténtica y especial que eres! 🌹",
+            "¡Te deseo un millon de abrazos sinceros, amistades leales y amor verdadero! 💞",
+            "¡Deseo que cada risa tuya la pueda escuchar cerquita y que siga siendo mi alivio favorito, incluso a la distancia! 🌌",
+            "¡Deseo que la música te acompañe siempre y te recuerde lo hermosa que es tu voz interior! 🎶",
+            "Se me acabaron los deseos 😅, pero deseo que todo mi cariño te acompañe siempre: Te quiero ♥️",
+            "Te quiero ♥️ Te adoro ♥️ Te amo ♥️ Te adoro ♥️ Te quiero ♥️",
+            "Te quiero ♥️ Te adoro ♥️ Te amo ♥️ Te adoro ♥️ Te quiero ♥️",
+            "Te quiero ♥️ Te adoro ♥️ Te amo ♥️ Te adoro ♥️ Te quiero ♥️",
+            "Y sobre todo, deseo que seas feliz… de todas las formas posibles, hoy y siempre. Porque si alguien lo merece, eres TÚ 🤎"
+        ];
+
+        // Variables globales
+        let litCandles = 0;
+        let isProcessing = false;
+        let firstClick = true;
+        let isPlaying = false;
+        let currentMessage = null; // Añadir variable para seguimiento del mensaje actual
+
+        // Elementos del DOM
+        const cakeButton = document.getElementById('cakeButton');
+        const musicPlayer = document.getElementById('musicPlayer');
+        const playButton = document.getElementById('playButton');
+        const playIcon = document.getElementById('playIcon');
+        const pauseIcon = document.getElementById('pauseIcon');
+        const progressBar = document.getElementById('progressBar');
+        const progressFill = document.getElementById('progressFill');
+        const currentTimeSpan = document.getElementById('currentTime');
+        const durationSpan = document.getElementById('duration');
+        const candleCounter = document.getElementById('candleCounter');
+        const completionMessage = document.getElementById('completionMessage');
+        const candlesContainer = document.getElementById('candlesContainer');
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        const volumeSlider = document.getElementById('volumeSlider');
+
+        // Crear velas
+        function createCandles() {
+            const candlePositions = [
+                // Fila superior (5 velas)
+                ...Array.from({ length: 5 }, (_, i) => ({ left: 35 + i * 7.5, top: 25 })),
+                // Fila media (8 velas)
+                ...Array.from({ length: 8 }, (_, i) => ({ left: 28 + i * 6.3, top: 45 })),
+                // Fila inferior (8 velas)
+                ...Array.from({ length: 8 }, (_, i) => ({ left: 28 + i * 6.3, top: 65 }))
+            ];
+
+            candlePositions.forEach((pos, index) => {
+                const candleDiv = document.createElement('div');
+                candleDiv.className = `absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-500 scale-75 opacity-60`;
+                candleDiv.style.left = `${pos.left}%`;
+                candleDiv.style.top = `${pos.top}%`;
+                candleDiv.innerHTML = `
+                    <div class="w-1.5 h-6 bg-gradient-to-t from-yellow-200 to-yellow-100 rounded-t-sm relative shadow-sm">
+                        <div class="flame absolute -top-2.5 left-1/2 transform -translate-x-1/2" style="display: none;">
+                            <div class="w-1.5 h-2.5 bg-gradient-to-t from-orange-400 via-yellow-400 to-yellow-200 rounded-full animate-flicker opacity-90"></div>
+                            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-0.5 h-1.5 bg-gradient-to-t from-red-400 to-orange-300 rounded-full animate-flicker-inner"></div>
+                        </div>
+                    </div>
+                `;
+                candlesContainer.appendChild(candleDiv);
+            });
+        }
+
+        // Crear mensaje flotante
+        function createFloatingMessage(message, x, y) {
+            // Eliminar mensaje anterior si existe
+            if (currentMessage) {
+                currentMessage.remove();
+            }
+
+            const messageDiv = document.createElement('div');
+            // Posicionar justo debajo de la torta, centrado
+            const cakeRect = cakeButton.getBoundingClientRect();
+            const scrollY = window.scrollY || window.pageYOffset;
+            messageDiv.className = 'fixed pointer-events-none z-30 left-1/2';
+            // Offset más pequeño para subir el mensaje
+            let offset = 28 + 50;
+            if (window.innerWidth < 500) {
+                offset = 16 + 50;
+            }
+            let top = cakeRect.bottom + offset + scrollY;
+            // Si el mensaje se sale de la pantalla, lo ajustamos
+            const maxBottom = window.innerHeight + scrollY - 60;
+            if (top > maxBottom) top = maxBottom;
+            messageDiv.style.top = top + 'px';
+            messageDiv.style.transform = 'translateX(-50%)';
+            messageDiv.style.transition = 'opacity 0.2s, transform 0.2s';
+            messageDiv.style.opacity = '0';
+            messageDiv.innerHTML = `
+                <div class="bg-gradient-to-r from-purple-900/90 to-pink-900/90 backdrop-blur-md text-white px-6 py-3 rounded-2xl border-2 border-pink-300/50 shadow-2xl animate-message-appear message-content">
+                    <div class="text-center">
+                        <div class="text-lg font-bold text-yellow-300 mb-1 drop-shadow-lg">${message.split('🎉')[0]}</div>
+                        <div class="text-2xl">${message.includes('🎉') ? '🎉' : '✨'}</div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(messageDiv);
+            currentMessage = messageDiv; // Guardar referencia al mensaje actual
+            
+            void messageDiv.offsetWidth;
+            messageDiv.style.opacity = '1';
+            messageDiv.style.transform = 'translateX(-50%) translateY(0)';
+            setTimeout(() => {
+                if (messageDiv.isConnected) { // Verificar si el elemento aún existe
+                    messageDiv.style.opacity = '0';
+                    messageDiv.style.transform = 'translateX(-50%) translateY(16px)';
+                }
+            }, 5500);
+            setTimeout(() => {
+                if (messageDiv.isConnected) { // Verificar si el elemento aún existe
+                    messageDiv.remove();
+                }
+            }, 6000);
+        }
+
+        // Crear partículas
+        function createParticles(x, y) {
+            const particleCount = Math.floor(Math.random() * 6) + 8;
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                const angle = Math.random() * 360;
+                const distance = Math.random() * 70 + 50;
+                const particleX = Math.cos(angle * Math.PI / 180) * distance;
+                const particleY = Math.sin(angle * Math.PI / 180) * distance;
+
+                particle.className = 'absolute w-1 h-1 bg-pink-400 rounded-full pointer-events-none z-10 animate-particle-burst';
+                particle.style.left = `${x}px`;
+                particle.style.top = `${y}px`;
+                particle.style.setProperty('--particle-x', `${particleX}px`);
+                particle.style.setProperty('--particle-y', `${particleY}px`);
+
+                document.body.appendChild(particle);
+
+                setTimeout(() => {
+                    particle.remove();
+                }, 1000);
+            }
+        }
+
+        // Formatear tiempo
+        function formatTime(time) {
+            const minutes = Math.floor(time / 60);
+            const seconds = Math.floor(time % 60);
+            return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        // Manejar clic en el pastel
+        function handleCakeClick(e) {
+            if (isProcessing || litCandles >= 21) return;
+            
+            isProcessing = true;
+
+            // Activar música en el primer clic
+            if (firstClick) {
+                musicPlayer.style.display = 'block';
+                setTimeout(() => {
+                    musicPlayer.style.opacity = '1';
+                    musicPlayer.style.transform = 'translate(-50%, 0)';
+                }, 10);
+                firstClick = false;
+                backgroundMusic.volume = volumeSlider.value / 100;
+                backgroundMusic.play().then(() => {
+                    isPlaying = true;
+                    playIcon.style.display = 'none';
+                    pauseIcon.style.display = 'block';
+                }).catch(console.error);
+            }
+
+            // Encender la siguiente velita
+            const candles = candlesContainer.children;
+            if (candles[litCandles]) {
+                candles[litCandles].className = candles[litCandles].className.replace('scale-75 opacity-60', 'scale-100 opacity-100');
+                candles[litCandles].querySelector('.flame').style.display = 'block';
+            }
+
+            // Crear partículas y mensaje
+            const rect = cakeButton.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            createParticles(centerX, centerY);
+            createFloatingMessage(BIRTHDAY_MESSAGES[litCandles] || "¡Feliz cumpleaños! 🎉", centerX, centerY);
+
+            litCandles++;
+            candleCounter.textContent = `${litCandles} deseos para tí, Dulce Bonita 🤎`;
+
+            if (litCandles === 21) {
+                completionMessage.style.display = 'block';
+            }
+
+            setTimeout(() => {
+                isProcessing = false;
+            }, 500);
+        }
+
+        // Manejar música
+        function toggleMusic() {
+            if (isPlaying) {
+                backgroundMusic.pause();
+                isPlaying = false;
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+            } else {
+                backgroundMusic.volume = volumeSlider.value / 100;
+                backgroundMusic.play().then(() => {
+                    isPlaying = true;
+                    playIcon.style.display = 'none';
+                    pauseIcon.style.display = 'block';
+                }).catch(console.error);
+            }
+        }
+
+        // Actualizar progreso de música
+        function updateProgress() {
+            if (backgroundMusic.duration) {
+                const progress = (backgroundMusic.currentTime / backgroundMusic.duration) * 100;
+                progressFill.style.width = `${progress}%`;
+                currentTimeSpan.textContent = formatTime(backgroundMusic.currentTime);
+            }
+        }
+
+        // Manejar clic en barra de progreso
+        function handleProgressClick(e) {
+            if (backgroundMusic.duration) {
+                const rect = progressBar.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const newTime = (clickX / rect.width) * backgroundMusic.duration;
+                backgroundMusic.currentTime = newTime;
+            }
+        }
+
+        function updateVolume() {
+            const volume = volumeSlider.value / 100;
+            backgroundMusic.volume = volume;
+            
+            // Update slider background to show current volume
+            const percentage = volumeSlider.value;
+            volumeSlider.style.background = `linear-gradient(to right, #ec4899 0%, #ec4899 ${percentage}%, rgba(255,255,255,0.2) ${percentage}%, rgba(255,255,255,0.2) 100%)`;
+        }
+
+        // Event listeners
+        cakeButton.addEventListener('click', handleCakeClick);
+        playButton.addEventListener('click', toggleMusic);
+        progressBar.addEventListener('click', handleProgressClick);
+        volumeSlider.addEventListener('input', updateVolume);
+        backgroundMusic.addEventListener('timeupdate', updateProgress);
+        backgroundMusic.addEventListener('loadedmetadata', () => {
+            durationSpan.textContent = formatTime(backgroundMusic.duration);
+        });
+
+        // Inicializar
+        createCandles();
+        updateVolume();
+    </script>
+    <style>
+    /* Responsive: mensaje más pequeño en móvil */
+    @media (max-width: 500px) {
+        .message-content {
+            font-size: 0.95rem;
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            min-width: 0;
+            max-width: 90vw;
+        }
+        .message-content .text-lg {
+            font-size: 1rem;
+        }
+        .message-content .text-2xl {
+            font-size: 1.3rem;
+        }
+    }
+    </style>
+</body>
+</html>
